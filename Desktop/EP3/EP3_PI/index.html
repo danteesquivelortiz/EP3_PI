@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="peliculas">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Films Ranking</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script type="text/javascript" src="./js/angular/angular.min.js" charset="utf-8"></script>
+  <!-- // Tenemos que importar el controlador como use -->
+  <script type="text/javascript" src="./js/angular/angular-resource.js" charset="utf-8">
+    </script>
+  <script type="text/javascript" src="./js/angular/FirstController.js" charset="utf-8">
+    </script>
+
+</head>
+
+<!-- Se necesita importar el controlador en donde se va a ocupar -->
+<body ng-controller="FirstController" class="#263238 blue-grey darken-4">
+
+  <nav class="#607d8b blue-grey" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="index.html" class="brand-logo">Inicio</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Comentarios</a></li>
+        <li><a class="btn btn-floating btn-large cyan pulse #424242 grey darken-3"><i class="material-icons" id="miBoton">edit</i></a></li>
+      </ul>
+
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center white-text ">Peliculas</h1>
+      <br><br>
+
+    </div>
+  </div>
+  <div class="container"  style="width:100%"; >
+    <div class="section">
+      <div class="row">
+
+        <div class="col m6 s6" ng-repeat="movie in movies">
+          <div class="card blue #607d8b blue-grey">
+            <div class="card-image #b0bec5 blue-grey lighten-3">
+              <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">{{movie.original_title}}<i class="material-icons right">more_vert</i></span>
+              <span class="card-title grey-text text-darken-4"><i class="material-icons">today</i>{{movie.release_date}}</span>
+              <span class="card-title grey-text text-darken-4"><i class="material-icons">visibility</i>{{movie.popularity}}</span>
+            </div>
+            <div class="card-content">
+              <span class="card-title grey-text text-darken-4">Valoración</span>
+              <span class="card-title grey-text text-darken-4"><i class="material-icons">star</i> {{movie.vote_average}}</span>
+              <span class="card-title grey-text text-darken-4"><i class="material-icons">thumbs_up_down</i> {{movie.vote_count}}</span>
+
+            </div>
+            <div class="card-reveal #b0bec5 blue-grey lighten-3" >
+              <span class="card-title grey-text text-darken-4">{{movie.original_title}}<i class="material-icons right">close</i></span>
+              <p>{{ movie.overview }}</p>
+            </div>
+          </div>
+        </div>
+
+
+    <br><br>
+  </div>
+  <div class="progress">
+     <div class="indeterminate"></div>
+ </div>
+  <div class="section white #cfd8dc blue-grey lighten-4"   ng-controller="ComentariosController">
+  <div class="input-field col s12" id="scrollToHere">
+  <h4>Cuéntanos qué opinas</h4>
+  <!-- <h8>Nombre</h8><br>
+  <input type="text" name="" value="" pattern="[a-zA-Z0-9]+" id="nom" >--->
+  <h8>Comentario</h8><br>
+  <input ng-model="nombre" ng-keyup="contar()" type="text"  class="validate" placeholder="Comentarios" pattern="[a-zA-Z0-9]+">
+  {{fin}}
+  </div>
+  <div class="input-field col s12">
+    <button class="waves-effect waves-light btn-large #424242 grey darken-3" type="submit" name="action" ng-click="mostrar()" id="envia">Enviar
+    </button>
+  </div>
+
+  <div class="input-field col s12" ng-repeat="post in array">
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="images/user.png" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              <span class="black-text">
+                <input type="text" name="nombre3" id="nombre3" class="nombre3" value="">
+                <h6>{{post.post}}</h6>
+                <h6>{{count}}</h6>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  </div>
+  <footer class="page-footer blue #607d8b blue-grey">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Dante Gerardo Esquivel Ortiz</h5>
+          <div class="footer-copyright">
+    </div>
+  </footer>
+  </body>
+
+</html>
+<script type="text/javascript">
+//$('#envia').attr("disabled", true);
+$(document).ready(function()
+	{
+	$("#boton02").click(function () {
+	//saco el valor accediendo a un input de tipo text y name = nombre2 y lo asigno a uno con name = nombre3
+	$("#nombre3").val($("#nom").val());
+	});
+});
+
+$("#miBoton").click(function () {
+    $('html,body').animate({
+        scrollTop: $("#scrollToHere").offset().top
+    }, 2000);
+});
+</script>
